@@ -1,5 +1,6 @@
 // import React from "react";
-import Head from "next/head";
+import Head from 'next/head';
+import { GetServerSideProps } from 'next';
 
 import { ChallengeBox } from "../components/ChallengeBox";
 import { CompletedChallenges } from "../components/CompletedChallenges";
@@ -10,7 +11,9 @@ import { Profile } from "../components/Profile";
 import styles from '../styles/pages/Home.module.css';
 import { CountdownProvider } from "../contexts/CountdownContext";
 
-export default function Home() {
+export default function Home(props) {
+  // console.log(props);
+
   return (
   <div className={styles.container}>
     <Head>
@@ -34,4 +37,20 @@ export default function Home() {
 
   </div>
   )
+}
+
+//cookies
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  //chamada api
+  const user = {
+    level: 1,
+    currentExperience: 50,
+    challengesCompleted: 2,
+  }
+
+  console.log('user');
+
+  return {
+     props: user 
+  }
 }
